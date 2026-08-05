@@ -1,0 +1,37 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+const pageTitle = "Tag Index";
+const allPosts = Object.values(import.meta.glob('../posts/*.md', { eager: true }));
+const temas =  [...new Set(allPosts.map((post: any) => post.frontmatter.temas).flat())];
+---
+<BaseLayout pageTitle={pageTitle}>
+  <div class="temas">
+    {temas.map((tema) => (
+      <p class="tema"><a href={`/temas/${tema}`}>{tema}</a></p>
+    ))}
+  </div>
+</BaseLayout>
+
+<style>
+  a {
+    color: #00539F;
+  }
+
+  .temas {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .tema {
+    margin: 0.25em;
+    border: dotted 1px #a1a1a1;
+    border-radius: .5em;
+    padding: .5em 1em;
+    font-size: 1.15em;
+    background-color: #F8FCFD;
+  }
+
+  .tema a {
+    text-decoration: none;
+  }
+</style>

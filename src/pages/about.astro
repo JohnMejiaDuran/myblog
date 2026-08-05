@@ -1,24 +1,46 @@
 ---
+import '../styles/global.css';
+import BaseLayout from '../layouts/BaseLayout.astro';
+    
+const pageTitle = "About Me";
+const identity = {
+  firstName: "John Mejia",
+  country: "Colombia",
+  occupation: "Software Engineer",
+  hobbies: ["photography", "drawing", "videogames", "traveling", "learning new things"],
+};
+
+const skills = ["HTML", "CSS", "JavaScript", "React", "Astro", "Writing Docs"];
+
+const happy = true;
+const finished = false;
+const goal = 3;
+
 
 ---
+<BaseLayout pageTitle={pageTitle}>
+    <h2>... and my new Astro site!</h2>
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
+    <p>Here are a few facts about me:</p>
+    <ul>
+        <li>My name is {identity.firstName}</li>
+        <li>I am from {identity.country}</li>
+        <li>I work as a {identity.occupation}</li>
+        {identity.hobbies.length >= 2 &&
+            <li>Two of my hobbies are: {identity.hobbies[0]} and {identity.hobbies[2]}</li>
+        }
+    </ul>
+    <p>Here are some of my skills:</p>
+    <ul>
+        {skills.map((skill) => (<li class="skill">{skill}</li>))}
+    </ul>
+    <p>This site will update as I complete more of the tutorial</p>
 
-        <a href="/">Home</a>
-		<h1>About Me</h1>
-        <h2>... and my new Astro site!</h2>
-
-        <p>I am working through Astro and building this site!</p>
-
-        <p>This site will update as I complete more of the tutorial</p>
-	</body>
-</html>
+    {happy && <p>I am happy to be learning Astro!</p>}
+    {finished && <p>I have finished the tutorial!</p>}
+    {goal === 3 ?
+        <p>I have completed {goal} goals in the tutorial!</p>
+        :
+        <p>I have completed {goal} goals in the tutorial, but I still have more to do!</p>
+    }
+</BaseLayout>
